@@ -1,0 +1,20 @@
+# 26.x mods.toml layout: no modLoader/loaderVersion, javafml is the default. license is mandatory.
+# License text: https://polyformproject.org/licenses/noncommercial/1.0.0 (also shipped as LICENSE in the jar)
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description="${mod_description}"
+
+[[dependencies.${mod_id}]]
+modId="neoforge"
+versionRange="${neo_version_range}"
+mandatory=true
+
+[[dependencies.${mod_id}]]
+modId="minecraft"
+versionRange="${minecraft_version_range}"
+mandatory=true

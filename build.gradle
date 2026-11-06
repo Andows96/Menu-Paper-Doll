@@ -1,0 +1,73 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.142'
+}
+
+version = project.mod_version
+group = project.mod_group_id
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+neoForge {
+    // 26.3.0.101 的 NeoForm 源码重编译有缺陷（HolderSet），走二进制补丁路径。
+    enable {
+        version = project.neo_version
+        disableRecompilation = true
+    }
+
+    runs {
+        // -PrunDir=<path> 可复用已有实例目录（默认 run/）
+        def runDir = file(project.findProperty('runDir') ?: 'run')
+        client {
+            client()
+            gameDirectory = runDir
+        }
+        server { server(); programArgument '--nogui' }
+        data { data() }
+    }
+
+    mods {
+        "menu_paper_doll" { sourceSet sourceSets.main }
+    }
+}
+
+// mods.toml 里的 ${...} 占位符只在 toml 上展开，避免 Groovy 模板引擎误伤其它资源。
+processResources {
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand project.properties
+    }
+}
+
+// 许可正文跟着 jar 一起分发（PolyForm 的 Notices 条要求随附条款或其 URL）。
+jar {
+    from('LICENSE')
+}
+
+// 开发辅助：把 NeoForm 缓存里已转换好的 26.3 源码解包到 build/refsrc，供离线查签名用。
+tasks.register('extractRefSources', Copy) {
+    def cacheDir = file("${gradle.gradleUserHomeDir}/caches/neoformruntime/intermediate_results")
+    from {
+        def zips = fileTree(cacheDir) { include 'transformSources_*_output.zip' }.files
+        zips ? zipTree(zips.max { it.lastModified() }) : []
+    }
+    into layout.buildDirectory.dir('refsrc')
+}
+
+// 开发辅助：解包缓存里的 NeoForge 源码 jar（ScreenEvent / ConfigurationScreen 等）。
+def neoForgeCacheDir = new File(gradle.gradleUserHomeDir, "caches/modules-2/files-2.1/net.neoforged/neoforge/${project.neo_version}")
+
+tasks.register('extractNeoForgeSources') {
+    doLast {
+        def jars = fileTree(neoForgeCacheDir).files.findAll { it.name.endsWith('-sources.jar') }
+        if (jars.isEmpty()) {
+            throw new GradleException("no sources jar under ${neoForgeCacheDir}")
+        }
+        def jar = jars.max { it.lastModified() }
+        def out = layout.buildDirectory.dir('refnf').get().asFile
+        copy {
+            from zipTree(jar)
+            into out
+        }
+        println "extracted ${jar.name} -> ${out}"
+    }
+}
