@@ -5,9 +5,9 @@ model in the inventory, always turns to look at your mouse cursor, and can be sp
 left-click dragging. If [Dragon Wings: Rebuild](https://github.com/Andows96/Dragon-Wings-Rebuild) is
 installed, the doll can wear its wings.
 
-主界面上站着一个缩小版的自己（使用你账号的皮肤）。它像物品栏里那个小人一样站在左侧，一直转头看向
-你的鼠标；按住左键拖动可以让它原地转身。装了
-[Dragon Wings: Rebuild](https://github.com/Andows96/Dragon-Wings-Rebuild) 时，小人背后还能显示龙翅膀。
+主界面上显示皮肤，且始终看向鼠标。按住左键拖动可让它原地旋转。
+装有
+[Dragon Wings: Rebuild](https://github.com/Andows96/Dragon-Wings-Rebuild) 时，背后可显示龙翅膀。
 
 ## License
 
