@@ -1,7 +1,6 @@
 # Menu Paper Doll
 
-A paper doll of your own skin on the Minecraft title screen. It stands on the left like the player
-model in the inventory, always turns to look at your mouse cursor, and can be spun around by
+A paper doll of your own skin on the Minecraft title screen. It always turns to look at your mouse cursor, and can be spun around by
 left-click dragging. If [Dragon Wings: Rebuild](https://github.com/Andows96/Dragon-Wings-Rebuild) is
 installed, the doll can wear its wings.
 
