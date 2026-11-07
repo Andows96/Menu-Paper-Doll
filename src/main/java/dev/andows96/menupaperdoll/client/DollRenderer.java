@@ -79,10 +79,9 @@ public final class DollRenderer {
     public static void render(GuiGraphicsExtractor graphics, int screenWidth, int screenHeight, int mouseX, int mouseY) {
         lastSubmittedState = null;
 
-        if (!MenuPaperDollConfig.SPEC.isLoaded() || !MenuPaperDollConfig.ENABLED.get()) {
+        if (!MenuPaperDollConfig.isEnabled()) {
             return;
         }
-
         DollLayout layout = layout(screenWidth, screenHeight);
         if (layout == null) {
             // Window too small for the requested doll size.
@@ -168,7 +167,7 @@ public final class DollRenderer {
      * @return {@code true} if the cursor is over the doll's silhouette on the title screen
      */
     public static boolean isOverDoll(int screenWidth, int screenHeight, double mouseX, double mouseY) {
-        if (!MenuPaperDollConfig.SPEC.isLoaded() || !MenuPaperDollConfig.ENABLED.get()) {
+        if (!MenuPaperDollConfig.isEnabled()) {
             return false;
         }
         DollLayout layout = layout(screenWidth, screenHeight);

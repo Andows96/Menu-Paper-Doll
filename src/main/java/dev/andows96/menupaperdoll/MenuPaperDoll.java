@@ -1,6 +1,7 @@
 package dev.andows96.menupaperdoll;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import dev.andows96.menupaperdoll.client.DollConfigScreen;
 import dev.andows96.menupaperdoll.client.DollDrag;
 import dev.andows96.menupaperdoll.client.DollRenderer;
 import dev.andows96.menupaperdoll.compat.DragonWingsCompat;
@@ -16,7 +17,6 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 
@@ -35,8 +35,9 @@ public final class MenuPaperDoll {
 
     public MenuPaperDoll(IEventBus modEventBus, ModContainer container) {
         container.registerConfig(ModConfig.Type.CLIENT, MenuPaperDollConfig.SPEC);
-        // Standard NeoForge config screen, so Configured / Catalogue can pick it up as well.
-        container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        // Standard NeoForge config screen (with the description-less options trimmed), so Configured /
+        // Catalogue can pick it up as well.
+        container.registerExtensionPoint(IConfigScreenFactory.class, DollConfigScreen::create);
 
         NeoForge.EVENT_BUS.addListener((ScreenEvent.Render.Foreground event) -> onScreenRender(event));
         NeoForge.EVENT_BUS.addListener((InputEvent.MouseButton.Pre event) -> onRawMouseButton(event));

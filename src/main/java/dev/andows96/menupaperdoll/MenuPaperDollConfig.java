@@ -10,9 +10,9 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public final class MenuPaperDollConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-    public static final ModConfigSpec.BooleanValue ENABLED = BUILDER
+    public static final ModConfigSpec.EnumValue<YesNo> ENABLED = BUILDER
             .translation("menu_paper_doll.configuration.enabled")
-            .define("enabled", true);
+            .defineEnum("enabled", YesNo.YES);
 
     public static final ModConfigSpec.EnumValue<DollPosition> POSITION = BUILDER
             .translation("menu_paper_doll.configuration.position")
@@ -67,9 +67,14 @@ public final class MenuPaperDollConfig {
 
     private MenuPaperDollConfig() {}
 
+    /** {@return whether the doll is switched on in the config} */
+    public static boolean isEnabled() {
+        return SPEC.isLoaded() && ENABLED.get() == YesNo.YES;
+    }
+
     /** {@return whether the doll should render dragon wings this frame} */
     public static boolean shouldShowDragonWings() {
-        return SHOW_DRAGON_WINGS != null && SPEC.isLoaded() && ENABLED.get() && SHOW_DRAGON_WINGS.get();
+        return SHOW_DRAGON_WINGS != null && isEnabled() && SHOW_DRAGON_WINGS.get();
     }
 
     /**
