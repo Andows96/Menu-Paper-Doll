@@ -17,11 +17,25 @@ public final class MenuPaperDollConfig {
             .define("enabled", true);
 
     public static final ModConfigSpec.EnumValue<DollPosition> POSITION = BUILDER
-            .comment("Where the doll stands on the title screen.",
+            .comment("Where the doll stands on the title screen (default: right side, slightly below the centre).",
                     "Anchors are relative to the screen: left/right is 14% / 86% of the width,",
                     "top/middle/bottom is 25% / 55% / 80% of the height.")
             .translation("menu_paper_doll.configuration.position")
-            .defineEnum("position", DollPosition.DEFAULT);
+            .defineEnum("position", DollPosition.RIGHT);
+
+    public static final ModConfigSpec.IntValue OFFSET_X = BUILDER
+            .comment("Moves the doll horizontally, in percent of the screen width.",
+                    "Negative values move it left, positive values move it right.",
+                    "The doll is kept inside the screen, so it stops at the edges.")
+            .translation("menu_paper_doll.configuration.offsetX")
+            .defineInRange("offsetX", 0, -50, 50);
+
+    public static final ModConfigSpec.IntValue OFFSET_Y = BUILDER
+            .comment("Moves the doll vertically, in percent of the screen height.",
+                    "Negative values move it up, positive values move it down.",
+                    "The doll is kept inside the screen, so it stops at the edges.")
+            .translation("menu_paper_doll.configuration.offsetY")
+            .defineInRange("offsetY", 0, -50, 50);
 
     public static final ModConfigSpec.IntValue SCALE_PERCENT = BUILDER
             .comment("Doll size in percent of the default size (default = one third of the screen height).",

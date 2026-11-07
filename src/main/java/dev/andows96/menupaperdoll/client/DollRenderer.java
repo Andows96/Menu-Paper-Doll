@@ -185,8 +185,11 @@ public final class DollRenderer {
 
         float dollHeight = screenHeight * DEFAULT_HEIGHT_RATIO * (scalePercent / 100.0F);
         float halfBox = dollHeight * BOX_RATIO * 0.5F;
-        float anchorX = screenWidth * position.centerXRatio();
-        float anchorY = screenHeight * position.centerYRatio();
+        // Manual fine tuning on top of the preset anchor, in percent of the screen size.
+        float anchorX = screenWidth * position.centerXRatio()
+            + screenWidth * (MenuPaperDollConfig.OFFSET_X.get() / 100.0F);
+        float anchorY = screenHeight * position.centerYRatio()
+            + screenHeight * (MenuPaperDollConfig.OFFSET_Y.get() / 100.0F);
 
         int x0 = Math.round(anchorX - halfBox);
         int x1 = Math.round(anchorX + halfBox);

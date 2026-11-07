@@ -9,10 +9,10 @@ import net.neoforged.neoforge.common.TranslatableEnum;
  * the screen width / height.
  */
 public enum DollPosition implements TranslatableEnum {
-    /** Left side, slightly below the vertical centre (the intended default). */
-    DEFAULT(0.14F, 0.55F),
-    /** Right side, slightly below the vertical centre. */
+    /** Right side, slightly below the vertical centre (the default). */
     RIGHT(0.86F, 0.55F),
+    /** Left side, slightly below the vertical centre. */
+    LEFT(0.14F, 0.55F),
     TOP_LEFT(0.14F, 0.25F),
     TOP_RIGHT(0.86F, 0.25F),
     BOTTOM_LEFT(0.14F, 0.80F),
