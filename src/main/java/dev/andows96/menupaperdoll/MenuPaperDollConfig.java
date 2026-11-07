@@ -34,10 +34,10 @@ public final class MenuPaperDollConfig {
 
     public static final ModConfigSpec.IntValue SCALE_PERCENT = BUILDER
             .comment("Doll size in percent of the screen height, as shown on the title screen.",
-                    "90 is the default size (one third of the screen height scaled to 90%).",
-                    "Lower values make the doll smaller, 100 is the largest.")
+                    "100 is the default size (one third of the screen height).",
+                    "Lower values make the doll smaller.")
             .translation("menu_paper_doll.configuration.scalePercent")
-            .defineInRange("scalePercent", 90, 30, 100);
+            .defineInRange("scalePercent", 100, 30, 100);
 
     public static final ModConfigSpec.EnumValue<FollowMode> FOLLOW_MODE = BUILDER
             .comment("How the doll follows the mouse cursor.",
