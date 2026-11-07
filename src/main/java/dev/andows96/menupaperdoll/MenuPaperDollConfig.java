@@ -11,15 +11,10 @@ public final class MenuPaperDollConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     public static final ModConfigSpec.BooleanValue ENABLED = BUILDER
-            .comment("Show the paper doll on the title screen.",
-                    "Turning this off hides the doll completely; every other option is ignored.")
             .translation("menu_paper_doll.configuration.enabled")
             .define("enabled", true);
 
     public static final ModConfigSpec.EnumValue<DollPosition> POSITION = BUILDER
-            .comment("Where the doll stands on the title screen (default: right side, slightly below the centre).",
-                    "Anchors are relative to the screen: left/right is 14% / 86% of the width,",
-                    "top/middle/bottom is 25% / 55% / 80% of the height.")
             .translation("menu_paper_doll.configuration.position")
             .defineEnum("position", DollPosition.RIGHT);
 
@@ -38,10 +33,11 @@ public final class MenuPaperDollConfig {
             .defineInRange("offsetY", 0, -50, 50);
 
     public static final ModConfigSpec.IntValue SCALE_PERCENT = BUILDER
-            .comment("Doll size in percent of the default size (default = one third of the screen height).",
-                    "Lower values make the doll smaller, 100 keeps the default size.")
+            .comment("Doll size in percent of the screen height, as shown on the title screen.",
+                    "90 is the default size (one third of the screen height scaled to 90%).",
+                    "Lower values make the doll smaller, 100 is the largest.")
             .translation("menu_paper_doll.configuration.scalePercent")
-            .defineInRange("scalePercent", 100, 20, 100);
+            .defineInRange("scalePercent", 90, 30, 100);
 
     public static final ModConfigSpec.EnumValue<FollowMode> FOLLOW_MODE = BUILDER
             .comment("How the doll follows the mouse cursor.",
@@ -51,8 +47,6 @@ public final class MenuPaperDollConfig {
             .defineEnum("followMode", FollowMode.BODY_AND_HEAD);
 
     public static final ModConfigSpec.IntValue ROTATION_SENSITIVITY = BUILDER
-            .comment("How far the doll turns per pixel the cursor is dragged while the left button is held.",
-                    "50 = the default feel, 100 = twice as fast, 0 = dragging does not turn the doll at all.")
             .translation("menu_paper_doll.configuration.rotationSensitivity")
             .defineInRange("rotationSensitivity", 50, 0, 100);
 

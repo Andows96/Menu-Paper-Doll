@@ -30,6 +30,8 @@ public final class DollRenderer {
     private static final float PLAYER_HEIGHT = 1.8F;
     /** Default doll height, as a fraction of the screen height. */
     private static final float DEFAULT_HEIGHT_RATIO = 1.0F / 3.0F;
+    /** Config value that maps to {@link #DEFAULT_HEIGHT_RATIO}; 90 in the config is the default size. */
+    private static final float BASELINE_SCALE_PERCENT = 90.0F;
     /** Render rectangle size relative to the doll height (extra margin so the model never gets clipped). */
     private static final float BOX_RATIO = 1.4F;
     /** How long we wait for the player skin before falling back to the default Steve/Alex skin. */
@@ -183,7 +185,7 @@ public final class DollRenderer {
         DollPosition position = MenuPaperDollConfig.POSITION.get();
         float scalePercent = MenuPaperDollConfig.SCALE_PERCENT.get().floatValue();
 
-        float dollHeight = screenHeight * DEFAULT_HEIGHT_RATIO * (scalePercent / 100.0F);
+        float dollHeight = screenHeight * DEFAULT_HEIGHT_RATIO * (scalePercent / BASELINE_SCALE_PERCENT);
         float halfBox = dollHeight * BOX_RATIO * 0.5F;
         // Manual fine tuning on top of the preset anchor, in percent of the screen size.
         float anchorX = screenWidth * position.centerXRatio()
