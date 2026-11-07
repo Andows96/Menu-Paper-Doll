@@ -32,7 +32,9 @@ neoForge {
 }
 
 // mods.toml 里的 ${...} 占位符只在 toml 上展开，避免 Groovy 模板引擎误伤其它资源。
+// 展开用的属性 Gradle 追踪不到，手动把 gradle.properties 声明成输入，改版本号才会真正重跑。
 processResources {
+    inputs.file('gradle.properties')
     filesMatching('META-INF/neoforge.mods.toml') {
         expand project.properties
     }
